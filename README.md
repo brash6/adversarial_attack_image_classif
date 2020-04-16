@@ -1,6 +1,8 @@
 # Adversarial Attack project
 
-To run this project, make sure you have downloaded "attack_train_PGD.npy" and "attack_test_PGD.npy" and stored it in /Adversarial_attack/data
+## Description
+
+This project is aiming to try several adversarial attacks on CIFAR10 data and then try to train models that are robusts to these attacks. 
 
 ## Configuration
 
@@ -14,6 +16,9 @@ A requirements file will soon be available
 To configure the project, you might want to modify constants.py file. 
 In this file, you can choose to train or load model with different parameters. 
 You can also try new attacks with different parameters. 
+
+To load attacked data, make sure you have downloaded "attack_train_PGD.npy" and "attack_test_PGD.npy" and stored it in /Adversarial_attack/data or you can launch new attack and store results
+
 
 ## Run the project
 
