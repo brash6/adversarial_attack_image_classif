@@ -18,3 +18,7 @@ You can also try new attacks with different parameters.
 ## Run the project
 
 Once you have configured what you want, to run the project, simply execute main.py
+
+## Visualize what was already done 
+
+To visualize what was already done, you can open "Adversarial_Attacks_Project_Summary.ipynb". A report will follow to explain theoretical parts.
