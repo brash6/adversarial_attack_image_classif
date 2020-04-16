@@ -11,6 +11,9 @@ TRAIN_standard_model = False
 TRAIN_robust_model = False
 TRAIN_large_robust_model = False
 
+# To visualize results of models, set to True
+VIZ = True
+
 # Paths of already trained model, to be modified as pleased
 STANDARD_trained_model = os.path.join(MODELS, 'standard_model_78acc.h5')
 ROBUST_trained_model = os.path.join(MODELS, 'Attacked_model_standard_robust2020-04-15.h5')

@@ -1,28 +1,9 @@
-import keras
 import constants as cst
+
 import numpy as np
-from keras.datasets import cifar10
-from keras.preprocessing.image import ImageDataGenerator
-from keras.models import Sequential
-from keras.layers import Dense, Dropout, Flatten
-from keras.layers import Conv2D, MaxPooling2D
-from keras.optimizers import SGD, Adam, Adamax, nadam, RMSprop
-from keras import regularizers
-from tensorflow.keras.layers import Input, Dense, Lambda, Flatten, Reshape, \
-    Conv2D, Conv2DTranspose, UpSampling2D, BatchNormalization, \
-    LeakyReLU, Dropout, Softmax, MaxPool2D, AveragePooling2D, Activation
-from tensorflow.keras.models import Model
-from tensorflow.keras import metrics
-from functools import partial
 from tqdm import tqdm_notebook
 import os
-import typing
-import matplotlib as mpl
-import matplotlib.pyplot as plt
-from tensorflow.keras.models import load_model
 import tensorflow as tf
-from datetime import date
-from numpy import asarray, savetxt, loadtxt
 
 
 def FGSM(x_test, y_test, delta, model):

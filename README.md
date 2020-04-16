@@ -9,7 +9,7 @@ This project is aiming to try several adversarial attacks on CIFAR10 data and th
 ### Install dependancies
 
 Make sure you have installed all necessary dependancies, I recommend to use a virtual environment. 
-A requirements file will soon be available
+In this matter, a yml file  and requirements file are available.
 
 ### Configuration of models and attacks
 
