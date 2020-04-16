@@ -2,14 +2,16 @@ import constants as cst
 import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow as tf
+import random
 
 
 def show_data(x, y):
     plt.figure(figsize=(16, 8))
     for i in range(0, 18):
+        index = random.randint(0, 50000)
         plt.subplot(3, 6, i + 1)
-        plt.imshow(x[i], cmap="gray")
-        plt.text(0, 2, s=f"label={cst.class_to_name[np.argmax(y[i])]}",
+        plt.imshow(x[index], cmap="gray")
+        plt.text(0, 2, s=f"label={cst.class_to_name[np.argmax(y[index])]}",
                  bbox=dict(facecolor='blue', alpha=0.9),
                  color="white")
         plt.axis("off")
@@ -99,7 +101,7 @@ def display_images(input_image, input_label, description, model):
     plt.show()
 
 
-def show_attack_effect(input_image, input_label, perturbations, model):
+def show_FGSM_attack_effect(input_image, input_label, perturbations, model):
     epsilons = [0, 0.01, 0.03, 0.06, 0.1, 0.15]
     descriptions = [('Epsilon = {:0.3f}'.format(eps) if eps else 'Input')
                     for eps in epsilons]
@@ -108,4 +110,19 @@ def show_attack_effect(input_image, input_label, perturbations, model):
     for i, eps in enumerate(epsilons):
         adv_x = input_image + eps * perturbations
         adv_x = tf.clip_by_value(adv_x, 0, 1)
+        display_images(adv_x, input_label, descriptions[i], model)
+
+
+def show_PGD_attack_effect(input_image, input_label, perturbations, nb_iter, model):
+    epsilons = [0, 0.01, 0.03, 0.06, 0.1, 0.15]
+    descriptions = [('Epsilon = {:0.3f}'.format(eps) if eps else 'Input')
+                    for eps in epsilons]
+    input_image, _ = preprocess_image_and_label(input_image, input_label)
+
+    print("with " + str(nb_iter) + " iterations")
+    for i, eps in enumerate(epsilons):
+        for iteration in range(nb_iter):
+            adv_x = input_image + eps * perturbations
+            eta = tf.clip_by_value(adv_x - input_image, -eps, eps)
+            adv_x = tf.clip_by_value(adv_x + eta, 0, 1)
         display_images(adv_x, input_label, descriptions[i], model)
