@@ -22,13 +22,10 @@ if __name__ == '__main__':
     # Attack Data
     if cst.MAKE_ATTACK:
         print("Attacking data")
-        x_train_attacked = attack_function.make_attack(x_train, y_train, cst.attack_delta, cst.attack_nb_iter, model,
-                                                       'x_train_attacked', cst.attack_style)
-        x_test_attacked = attack_function.make_attack(x_test, y_test, cst.attack_delta, cst.attack_nb_iter, model,
-                                                      'x_test_attacked', cst.attack_style)
+        x_test_attacked = attack_function.make_attack(x_test, y_test, cst.attack_delta, cst.attack_epsilon, model,
+                                                      'x_test_attacked_FGSM_0_03', cst.attack_nb_iter, cst.attack_style)
     else:
         print("Load attacked data")
-        x_train_attacked = np.load(cst.ATTACKED_TRAIN)
         x_test_attacked = np.load(cst.ATTACKED_TEST)
 
     if cst.VIZ:
@@ -41,23 +38,30 @@ if __name__ == '__main__':
     # Train or Load a robust model but only on attacked data
     if cst.TRAIN_robust_model:
         print("Training a new only attack robust model")
-        robust_model = models.train_model(x_train_attacked, y_train, cst.config_robust_model, 'robust_model')
+        robust_model = models.train_robust_model(x_train, y_train, cst.config_robust_model, 'robust_model')
     else:
         print("Loading robust standard model")
         robust_model = load_model(cst.ROBUST_trained_model)
 
+    # Attack Data with robust model
+    if cst.ROBUST_MAKE_ATTACK:
+        print("Attacking data")
+        x_test_attacked_robust = attack_function.make_attack(x_test, y_test, cst.attack_delta, robust_model,
+                                                      'robust_attack_test_PGD', cst.attack_nb_iter, cst.attack_style)
+    else:
+        print("Load attacked data")
+        x_test_attacked_robust = np.load(cst.ROBUST_ATTACKED_TEST)
+
     if cst.VIZ:
-        # Show the effect of learning only on attacked data
+        # Show the effect of adversarial learning
         print("On not attacked data, on the test data the robust model has an accuracy of:")
         visualization.show_dataset_and_predictions(x_test, y_test, robust_model)
         print("On attacked data, on the test data the robust model has an accuracy of:")
-        visualization.show_dataset_and_predictions(x_test_attacked, y_test, robust_model)
+        visualization.show_dataset_and_predictions(x_test_attacked_robust, y_test, robust_model)
 
     # Train or Load a large robust model to attacked data but also to not attacked data
-    if cst.TRAIN_large_robust_model:
+"""    if cst.TRAIN_large_robust_model:
         print("Training a new only attack robust model")
-        new_sample_train = np.concatenate((x_train_attacked, x_train), axis=0)
-        new_label_train = np.concatenate((y_train, y_train), axis=0)
         large_robust_model = models.train_model(new_sample_train, new_label_train, cst.config_large_robust_model, 'large_robust_model')
     else:
         print("Loading large robust standard model")
@@ -68,4 +72,4 @@ if __name__ == '__main__':
         print("On not attacked data, on the test data the robust model has an accuracy of:")
         visualization.show_dataset_and_predictions(x_test, y_test, large_robust_model)
         print("On attacked data, on the test data the robust model has an accuracy of:")
-        visualization.show_dataset_and_predictions(x_test_attacked, y_test, large_robust_model)
+        visualization.show_dataset_and_predictions(x_test_attacked, y_test, large_robust_model)"""

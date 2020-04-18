@@ -3,11 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="9f93317d-ad1b-4083-9351-dcefa04dac90" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/Adversarial_Attacks_Project_Summary-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/.ipynb_checkpoints/Adversarial_Attacks_Project_Summary-checkpoint.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Adversarial_Attacks_Project_Summary.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Adversarial_Attacks_Project_Summary.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/attack_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/attack_function.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/constants.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/visualization.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualization.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -83,6 +84,14 @@
       <option name="presentableId" value="Default" />
       <updated>1586942860276</updated>
     </task>
+    <task id="LOCAL-00001" summary="Update README, constants and add environment requirements">
+      <created>1587056592803</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1587056592803</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -97,5 +106,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Update README, constants and add environment requirements" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update README, constants and add environment requirements" />
   </component>
 </project>

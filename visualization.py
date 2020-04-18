@@ -103,7 +103,7 @@ def display_images(input_image, input_label, description, model):
 
 
 def show_FGSM_attack_effect(input_image, input_label, perturbations, model):
-    epsilons = [0, 0.01, 0.03, 0.06, 0.1, 0.15]
+    epsilons = [0, 0.01, 0.03, 0.045, 0.06, 0.1, 0.15]
     descriptions = [('Epsilon = {:0.3f}'.format(eps) if eps else 'Input')
                     for eps in epsilons]
     input_image, _ = preprocess_image_and_label(input_image, input_label)
@@ -115,15 +115,16 @@ def show_FGSM_attack_effect(input_image, input_label, perturbations, model):
 
 
 def show_PGD_attack_effect(input_image, input_label, perturbations, nb_iter, model):
-    epsilons = [0, 0.01, 0.03, 0.06, 0.1, 0.15]
+    epsilons = [0, 0.002, 0.005, 0.008, 0.01, 0.03, 0.045]
     descriptions = [('Epsilon = {:0.3f}'.format(eps) if eps else 'Input')
                     for eps in epsilons]
     input_image, _ = preprocess_image_and_label(input_image, input_label)
 
     print("with " + str(nb_iter) + " iterations")
+    adv_x = input_image
     for i, eps in enumerate(epsilons):
         for iteration in range(nb_iter):
-            adv_x = input_image + eps * perturbations
+            adv_x = adv_x + eps * perturbations
             eta = tf.clip_by_value(adv_x - input_image, -eps, eps)
             adv_x = tf.clip_by_value(adv_x + eta, 0, 1)
         display_images(adv_x, input_label, descriptions[i], model)
