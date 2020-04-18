@@ -6,7 +6,6 @@ from tqdm import tqdm_notebook
 import os
 import tensorflow as tf
 import random
-import art
 from art.classifiers import KerasClassifier
 from art.attacks import FastGradientMethod, CarliniLInfMethod, DeepFool, CarliniL2Method
 
@@ -82,6 +81,29 @@ def attack_gen(x_train, y_train, model, batch_size):
         yield (x, y)
 
 
+def attack_gen_rand(x_train, y_train, model, batch_size, attack_delta=0.003, attack_nb_iter=3, attack_style="FGSM"):
+    while True:
+        x = []
+        y = []
+        for batch in range(batch_size):
+            index = random.randint(0, 49999)
+            tresh = random.randint(0, 100)
+            if tresh > 50:
+                if attack_style == "PGD":
+                    x.append(PGD_infini(x_train[index], y_train[index], attack_delta, attack_nb_iter, model))
+                    y.append(y_train[index])
+                if attack_style == 'FGSM':
+                    x.append(FGSM(x_train[index], y_train[index], attack_delta, model))
+                    y.append(y_train[index])
+            else:
+                x.append(x_train[index])
+                y.append(y_train[index])
+        x = np.array(x)
+        y = np.array(y)
+
+        yield (x, y)
+
+
 def carlini_inf(x_test, model):
     classifier = KerasClassifier(model=model, clip_values=(0, 1))
     attack_cw = CarliniLInfMethod(classifier=classifier, eps=0.03, max_iter=40, learning_rate=0.01)
@@ -91,7 +113,9 @@ def carlini_inf(x_test, model):
 
 def carlini_l2(x_test, model):
     classifier = KerasClassifier(model=model, clip_values=(0, 1))
-    attack_cw = CarliniL2Method(classifier=classifier, confidence=0.0, targeted=False, learning_rate=0.01, binary_search_steps=10, max_iter=10, initial_const=0.01, max_halving=5, max_doubling=5, batch_size=1)
+    attack_cw = CarliniL2Method(classifier=classifier, confidence=0.0, targeted=False, learning_rate=0.01,
+                                binary_search_steps=10, max_iter=10, initial_const=0.01, max_halving=5, max_doubling=5,
+                                batch_size=1)
     x_test_adv = attack_cw.generate(x_test)
     return np.reshape(x_test_adv, (32, 32, 3))
 
@@ -101,5 +125,3 @@ def deep_fool(x_test, model):
     attack_cw = DeepFool(classifier=classifier, max_iter=4, epsilon=0.03, nb_grads=10, batch_size=1)
     x_test_adv = attack_cw.generate(x_test)
     return np.reshape(x_test_adv, (32, 32, 3))
-
-

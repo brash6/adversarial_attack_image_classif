@@ -11,13 +11,13 @@ TRAIN_standard_model = False
 TRAIN_robust_model = True
 TRAIN_large_robust_model = False
 
-# To visualize results of models, set to True
+# To visualize results on image samples of models and accuracy, set to True
 VIZ = False
 
 # Paths of already trained model, to be modified as pleased
 STANDARD_trained_model = os.path.join(MODELS, 'standard_model_78acc.h5')
-ROBUST_trained_model = os.path.join(MODELS, 'robust_model_colab.h5')
-LARGE_ROBUST_trained_model = os.path.join(MODELS, 'Attacked_model_large_robust2020-04-15.h5')
+ROBUST_trained_model = os.path.join(MODELS, 'robust_model_over_colab.h5')
+LARGE_ROBUST_trained_model = os.path.join(MODELS, 'robust_model_over_rand_colab.h5')
 
 # Attacks configuration
 MAKE_ATTACK = False       # Will load attacked data if False
@@ -28,10 +28,12 @@ attack_epsilon = 0.05
 attack_nb_iter = 3
 
 # Paths of already attacked data
-ROBUST_ATTACKED_TEST_FGSM = os.path.join(DATA, 'attack_robust_test_FGSM_003.npy')
-ROBUST_ATTACKED_TEST_PGD = os.path.join(DATA, 'attack_robust_test_PGD_iter5_0008.npy')
+ROBUST_ATTACKED_TEST_FGSM = os.path.join(DATA, 'attack_robust_over_test_FGSM_003.npy')
+ROBUST_ATTACKED_TEST_PGD3iter = os.path.join(DATA, 'attack_robust_over_test_PGD0008_3iter.npy')
+ROBUST_ATTACKED_TEST_PGD5iter = os.path.join(DATA, 'attack_robust_over_test_PGD0008_5iter.npy')
 ATTACKED_TEST_PGD = os.path.join(DATA, 'attack_test_PGD_iter5_0008.npy')
 ATTACKED_TEST_FGSM = os.path.join(DATA, 'x_test_attacked_FGSM_0_03.npy')
+ROBUST_RAND_ATTACKED_TEST_FGSM = os.path.join(DATA, 'attack_robust_over_rand_test_FGSM003.npy')
 
 # Configuration of models (to be modified as pleased)
 config_standard_model = models.ModelConfig(

@@ -2,15 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9f93317d-ad1b-4083-9351-dcefa04dac90" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/models/robust_model_colab.h5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/robust_model_over_colab.h5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/robust_model_over_rand_colab.h5" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/Adversarial_Attacks_Project_Summary-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/.ipynb_checkpoints/Adversarial_Attacks_Project_Summary-checkpoint.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Adversarial_Attacks_Project_Summary.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Adversarial_Attacks_Project_Summary.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/attack_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/attack_function.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/constants.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -99,7 +96,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587225584813</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Add robust model, update main">
+      <created>1587236795133</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1587236795133</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -118,6 +122,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Update README, constants and add environment requirements" />
     <MESSAGE value="Adversarial training updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adversarial training updates" />
+    <MESSAGE value="Add robust model, update main" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add robust model, update main" />
   </component>
 </project>
