@@ -16,7 +16,7 @@ VIZ = False
 
 # Paths of already trained model, to be modified as pleased
 STANDARD_trained_model = os.path.join(MODELS, 'standard_model_78acc.h5')
-ROBUST_trained_model = os.path.join(MODELS, 'robust_model.h5')
+ROBUST_trained_model = os.path.join(MODELS, 'robust_model_colab.h5')
 LARGE_ROBUST_trained_model = os.path.join(MODELS, 'Attacked_model_large_robust2020-04-15.h5')
 
 # Attacks configuration
@@ -28,7 +28,8 @@ attack_epsilon = 0.05
 attack_nb_iter = 3
 
 # Paths of already attacked data
-ROBUST_ATTACKED_TEST = os.path.join(DATA, 'robust_attack_test_PGD.npy')
+ROBUST_ATTACKED_TEST_FGSM = os.path.join(DATA, 'attack_robust_test_FGSM_003.npy')
+ROBUST_ATTACKED_TEST_PGD = os.path.join(DATA, 'attack_robust_test_PGD_iter5_0008.npy')
 ATTACKED_TEST_PGD = os.path.join(DATA, 'attack_test_PGD_iter5_0008.npy')
 ATTACKED_TEST_FGSM = os.path.join(DATA, 'x_test_attacked_FGSM_0_03.npy')
 
@@ -53,16 +54,6 @@ config_robust_model = models.ModelConfig(
             lr=0.01
         )
 
-config_large_robust_model = models.ModelConfig(
-            conv_layers=[(256, 3), (256, 3), (256, 3)],
-            epochs=100,
-            step_per_epoch=350,
-            batch_size=128,
-            validation_split=0.1,
-            validation_steps=1,
-            nb_neurons_on_1st_FC_layer=32,
-            lr=0.01
-        )
 
 # constants labels of CIFAR10 to make some visualization
 class_to_name = {

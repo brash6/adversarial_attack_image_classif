@@ -59,17 +59,3 @@ if __name__ == '__main__':
         print("On attacked data, on the test data the robust model has an accuracy of:")
         visualization.show_dataset_and_predictions(x_test_attacked_robust, y_test, robust_model)
 
-    # Train or Load a large robust model to attacked data but also to not attacked data
-"""    if cst.TRAIN_large_robust_model:
-        print("Training a new only attack robust model")
-        large_robust_model = models.train_model(new_sample_train, new_label_train, cst.config_large_robust_model, 'large_robust_model')
-    else:
-        print("Loading large robust standard model")
-        large_robust_model = load_model(cst.LARGE_ROBUST_trained_model)
-
-    if cst.VIZ:
-        # Show the effect of learning only on attacked data
-        print("On not attacked data, on the test data the robust model has an accuracy of:")
-        visualization.show_dataset_and_predictions(x_test, y_test, large_robust_model)
-        print("On attacked data, on the test data the robust model has an accuracy of:")
-        visualization.show_dataset_and_predictions(x_test_attacked, y_test, large_robust_model)"""

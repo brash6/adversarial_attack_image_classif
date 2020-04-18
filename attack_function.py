@@ -6,6 +6,9 @@ from tqdm import tqdm_notebook
 import os
 import tensorflow as tf
 import random
+import art
+from art.classifiers import KerasClassifier
+from art.attacks import FastGradientMethod, CarliniLInfMethod, DeepFool, CarliniL2Method
 
 
 def FGSM(x_test, y_test, delta, model):
@@ -66,7 +69,9 @@ def attack_gen(x_train, y_train, model, batch_size):
         for batch in range(batch_size):
             index = random.randint(0, 49999)
             if cst.attack_style == "PGD":
-                x.append(PGD_infini(x_train[index], y_train[index], cst.attack_delta, cst.attack_epsilon, cst.attack_nb_iter, model))
+                x.append(
+                    PGD_infini(x_train[index], y_train[index], cst.attack_delta, cst.attack_epsilon, cst.attack_nb_iter,
+                               model))
                 y.append(y_train[index])
             if cst.attack_style == 'FGSM':
                 x.append(FGSM(x_train[index], y_train[index], cst.attack_delta, model))
@@ -75,3 +80,26 @@ def attack_gen(x_train, y_train, model, batch_size):
         y = np.array(y)
 
         yield (x, y)
+
+
+def carlini_inf(x_test, model):
+    classifier = KerasClassifier(model=model, clip_values=(0, 1))
+    attack_cw = CarliniLInfMethod(classifier=classifier, eps=0.03, max_iter=40, learning_rate=0.01)
+    x_test_adv = attack_cw.generate(x_test)
+    return np.reshape(x_test_adv, (32, 32, 3))
+
+
+def carlini_l2(x_test, model):
+    classifier = KerasClassifier(model=model, clip_values=(0, 1))
+    attack_cw = CarliniL2Method(classifier=classifier, confidence=0.0, targeted=False, learning_rate=0.01, binary_search_steps=10, max_iter=10, initial_const=0.01, max_halving=5, max_doubling=5, batch_size=1)
+    x_test_adv = attack_cw.generate(x_test)
+    return np.reshape(x_test_adv, (32, 32, 3))
+
+
+def deep_fool(x_test, model):
+    classifier = KerasClassifier(model=model, clip_values=(0, 1))
+    attack_cw = DeepFool(classifier=classifier, max_iter=4, epsilon=0.03, nb_grads=10, batch_size=1)
+    x_test_adv = attack_cw.generate(x_test)
+    return np.reshape(x_test_adv, (32, 32, 3))
+
+
