@@ -36,7 +36,7 @@ def show_dataset_and_predictions(x, y, model):
             acc += 1
     acc = acc / len(prediction)
     text = str(round(acc * 100, 2)) + "%"
-    print(text + ' of accuracy')
+    print('The model performs ' + text + ' of accuracy on this data, here is a sample')
     for i in range(0, 18):
         plt.subplot(3, 6, i + 1)
         plt.imshow(x[i], cmap="gray")

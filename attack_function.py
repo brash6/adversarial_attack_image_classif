@@ -7,7 +7,7 @@ import os
 import tensorflow as tf
 import random
 from art.classifiers import KerasClassifier
-from art.attacks import FastGradientMethod, CarliniLInfMethod, DeepFool, CarliniL2Method
+from art.attacks import BasicIterativeMethod, CarliniLInfMethod, DeepFool, NewtonFool
 
 
 def FGSM(x_test, y_test, delta, model):
@@ -49,14 +49,58 @@ def PGD_infini(x_test, y_test, delta, epsilon, num_iter, model):
     return np.reshape(x_attack, (32, 32, 3))
 
 
-def make_attack(x, y, delta, epsilon, model, name, num_iter=3, style='PGD'):
+def carlini_inf(x_test, model, eps, max_iter, learning_rate):
+    classifier = KerasClassifier(model=model, clip_values=(0, 1))
+    attack_cw = CarliniLInfMethod(classifier=classifier, eps=eps, max_iter=max_iter, learning_rate=learning_rate)
+    x_test_adv = attack_cw.generate(x_test)
+    return np.reshape(x_test_adv, (32, 32, 3))
+
+
+def deep_fool(x_test, model, max_iter, epsilon, nb_grads, batch_size):
+    classifier = KerasClassifier(model=model, clip_values=(0, 1))
+    attack_cw = DeepFool(classifier=classifier, max_iter=max_iter, epsilon=epsilon, nb_grads=nb_grads, batch_size=batch_size)
+    x_test_adv = attack_cw.generate(x_test)
+    return np.reshape(x_test_adv, (32, 32, 3))
+
+
+def newton_fool(x_test, model, max_iter, eta, batch_size):
+    classifier = KerasClassifier(model=model, clip_values=(0, 1))
+    attack_cw = NewtonFool(classifier, max_iter=max_iter, eta=eta, batch_size=batch_size)
+    x_test_adv = attack_cw.generate(x_test)
+    return np.reshape(x_test_adv, (32, 32, 3))
+
+
+def basic_iter(x_test, model, eps, eps_step, max_iter, targeted, batch_size):
+    classifier = KerasClassifier(model=model, clip_values=(0, 1))
+    attack_cw = BasicIterativeMethod(classifier=classifier, eps=eps, eps_step=eps_step, max_iter=max_iter, targeted=targeted, batch_size=batch_size)
+    x_test_adv = attack_cw.generate(x_test)
+    return np.reshape(x_test_adv, (32, 32, 3))
+
+
+def make_attack(x, y, model, name, style='PGD'):
     if style == 'PGD':
         attacked_data = np.array(
-            [PGD_infini(x[idx], y[idx], delta, epsilon, num_iter, model) for idx in tqdm_notebook(range(len(x)))])
+            [PGD_infini(x[idx], y[idx], cst.PGD_attack_delta, cst.PGD_attack_epsilon, cst.PGD_attack_nb_iter, model) for idx in tqdm_notebook(range(len(x)))])
         np.save(os.path.join(cst.DATA, name), attacked_data)
     if style == 'FGSM':
         attacked_data = np.array(
-            [FGSM(x[idx], y[idx], delta, model) for idx in tqdm_notebook(range(len(x)))])
+            [FGSM(x[idx], y[idx], cst.FGSM_attack_delta, model) for idx in tqdm_notebook(range(len(x)))])
+        np.save(os.path.join(cst.DATA, name), attacked_data)
+    if style == 'Carlini_Inf':
+        attacked_data = np.array(
+            [carlini_inf(x[idx], model, cst.CInf_eps, cst.CInf_max_iter, cst.CInf_learning_rate) for idx in tqdm_notebook(range(len(x)))])
+        np.save(os.path.join(cst.DATA, name), attacked_data)
+    if style == 'Deep_Fool':
+        attacked_data = np.array(
+            [deep_fool(x[idx], model, cst.DFool_max_iter, cst.DFool_epsilon, cst.DFool_nb_grads, cst.DFool_batch_size) for idx in tqdm_notebook(range(len(x)))])
+        np.save(os.path.join(cst.DATA, name), attacked_data)
+    if style == 'Newton_Fool':
+        attacked_data = np.array(
+            [NewtonFool(x[idx], model, cst.NFool_max_iter, cst.NFool_eta, cst.NFool_batch_size) for idx in tqdm_notebook(range(len(x)))])
+        np.save(os.path.join(cst.DATA, name), attacked_data)
+    if style == 'Basic_Iterative_Method':
+        attacked_data = np.array(
+            [basic_iter(x[idx], model, cst.BIter_eps, cst.BIter_eps_step, cst.BIter_max_iter, cst.BIter_targeted, cst.BIter_batch_size) for idx in tqdm_notebook(range(len(x)))])
         np.save(os.path.join(cst.DATA, name), attacked_data)
     return attacked_data
 
@@ -104,24 +148,4 @@ def attack_gen_rand(x_train, y_train, model, batch_size, attack_delta=0.003, att
         yield (x, y)
 
 
-def carlini_inf(x_test, model):
-    classifier = KerasClassifier(model=model, clip_values=(0, 1))
-    attack_cw = CarliniLInfMethod(classifier=classifier, eps=0.03, max_iter=40, learning_rate=0.01)
-    x_test_adv = attack_cw.generate(x_test)
-    return np.reshape(x_test_adv, (32, 32, 3))
 
-
-def carlini_l2(x_test, model):
-    classifier = KerasClassifier(model=model, clip_values=(0, 1))
-    attack_cw = CarliniL2Method(classifier=classifier, confidence=0.0, targeted=False, learning_rate=0.01,
-                                binary_search_steps=10, max_iter=10, initial_const=0.01, max_halving=5, max_doubling=5,
-                                batch_size=1)
-    x_test_adv = attack_cw.generate(x_test)
-    return np.reshape(x_test_adv, (32, 32, 3))
-
-
-def deep_fool(x_test, model):
-    classifier = KerasClassifier(model=model, clip_values=(0, 1))
-    attack_cw = DeepFool(classifier=classifier, max_iter=4, epsilon=0.03, nb_grads=10, batch_size=1)
-    x_test_adv = attack_cw.generate(x_test)
-    return np.reshape(x_test_adv, (32, 32, 3))
