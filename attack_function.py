@@ -1,5 +1,4 @@
 import constants as cst
-import visualization
 
 import numpy as np
 from tqdm import tqdm_notebook
@@ -113,11 +112,11 @@ def attack_gen(x_train, y_train, model, batch_size):
             index = random.randint(0, 49999)
             if cst.attack_style == "PGD":
                 x.append(
-                    PGD_infini(x_train[index], y_train[index], cst.attack_delta, cst.attack_epsilon, cst.attack_nb_iter,
+                    PGD_infini(x_train[index], y_train[index], cst.PGD_attack_delta, cst.PGD_attack_epsilon, cst.PGD_attack_nb_iter,
                                model))
                 y.append(y_train[index])
             if cst.attack_style == 'FGSM':
-                x.append(FGSM(x_train[index], y_train[index], cst.attack_delta, model))
+                x.append(FGSM(x_train[index], y_train[index], cst.FGSM_attack_delta, model))
                 y.append(y_train[index])
         x = np.array(x)
         y = np.array(y)

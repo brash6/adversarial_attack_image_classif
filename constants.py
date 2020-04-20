@@ -18,19 +18,22 @@ VIZ = False
 STANDARD_trained_model = os.path.join(MODELS, 'standard_model_78acc.h5')
 ROBUST_trained_model = os.path.join(MODELS, 'robust_model_over_colab.h5')
 LARGE_ROBUST_trained_model = os.path.join(MODELS, 'robust_model_over_rand_colab.h5')
+BEST_ROBUST_trained_model = os.path.join(MODELS, 'new_robust_model2_over_colab.h5')
 
 # Attacks configuration
 # Will load attacked data if False
 MAKE_ATTACK = False
 ROBUST_MAKE_ATTACK = False
 LARGE_ROBUST_MAKE_ATTACK = False
+
+# Attack to perform (also used for adversarial training)
 attack_style = 'PGD'  # 'PGD' or 'FGSM' or 'Carlini_Inf' or 'Deep_Fool' or 'Newton_Fool' or 'Basic_Iterative_Method'
 
 # All Attacks parameters
 # FGSM parameters
 FGSM_attack_delta = 0.03
 
-# PGD parameters
+# PGD parameters (also used for adversarial training)
 PGD_attack_delta = 0.03
 PGD_attack_epsilon = 0.05
 PGD_attack_nb_iter = 3
@@ -69,6 +72,9 @@ ATTACKED_TEST_CInf2 = os.path.join(DATA, 'CarliniLinf_12_acc_xtest.npy')
 ATTACKED_TEST_NFool = os.path.join(DATA, 'newtonfool_12.3_acc_xtest.npy')
 ATTACKED_TEST_BIter = os.path.join(DATA, 'BasicIterativeMethod_10.09_acc_xtest.npy')
 LARGE_ROBUST_ATTACKED_TEST_FGSM = os.path.join(DATA, 'attack_robust_over_rand_test_FGSM003.npy')
+LARGE_ROBUST_ATTACKED_TEST_PGD = os.path.join(DATA, 'attack_robust_over_rand_test_PGD0008_5iter.npy')
+BEST_ROBUST_ATTACKED_TEST_PGD = os.path.join(DATA, 'attack_new_robust_model2_over_colabPGD0005_5iter.npy')
+BEST_ROBUST_ATTACKED_TEST_FGSM = os.path.join(DATA, 'attack_new_robust_model2_over_colabFGSM003.npy')
 
 # Configuration of models if training (to be modified as pleased)
 config_standard_model = models.ModelConfig(
