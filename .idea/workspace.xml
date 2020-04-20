@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9f93317d-ad1b-4083-9351-dcefa04dac90" name="Default Changelist" comment="some minor updates">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="9f93317d-ad1b-4083-9351-dcefa04dac90" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/Adversarial_Attacks_Project_Summary-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/.ipynb_checkpoints/Adversarial_Attacks_Project_Summary-checkpoint.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Adversarial_Attacks_Project_Summary.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Adversarial_Attacks_Project_Summary.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/attack_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/attack_function.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/constants.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -123,7 +120,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587335906669</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Update README, add robust model attacks to notebook">
+      <created>1587405840415</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1587405840415</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -146,6 +150,7 @@
     <MESSAGE value="notebook update, random robust model adding, some updates" />
     <MESSAGE value="Add other attack functions, update README, some modifications" />
     <MESSAGE value="some minor updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="some minor updates" />
+    <MESSAGE value="Update README, add robust model attacks to notebook" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update README, add robust model attacks to notebook" />
   </component>
 </project>
