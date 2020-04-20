@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9f93317d-ad1b-4083-9351-dcefa04dac90" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/Adversarial_Attacks_Project_Summary-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/.ipynb_checkpoints/Adversarial_Attacks_Project_Summary-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Adversarial_Attacks_Project_Summary.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Adversarial_Attacks_Project_Summary.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/new_robust_model2_over_colab.h5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/presentation_images/results2.PNG" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -127,7 +127,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587405840415</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="minor update in notebook">
+      <created>1587406169690</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1587406169690</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -151,6 +158,7 @@
     <MESSAGE value="Add other attack functions, update README, some modifications" />
     <MESSAGE value="some minor updates" />
     <MESSAGE value="Update README, add robust model attacks to notebook" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update README, add robust model attacks to notebook" />
+    <MESSAGE value="minor update in notebook" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor update in notebook" />
   </component>
 </project>
